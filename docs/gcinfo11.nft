@@ -3,7 +3,7 @@
 ff 7|f                                                 
 ff 7|0+ 8ui.button.click0[810,810]8 7Play a noise on thef       
 ff 7|+ sound[volume,pitch]f                 7   speaker 
-ff 7|f                                                 
+ff 7|f      [0-3, 0.5-2]                                           
 ff 7|Uses the block file names from sounds.json,      
 ff 7|available to reference on the officialf 7Minecraftf 
 ff 7|f                                           7 wikif 
