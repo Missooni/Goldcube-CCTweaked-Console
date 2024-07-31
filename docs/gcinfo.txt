@@ -52,7 +52,7 @@ You can add more using these files as guidelines.
 
 --- 
 
-Guide To Creating Games Pt1
+Guide To Creating Games
 If you attempt to play a floppy disk that does not contain a
 'gcgame' folder, the system will copy a game template to the 
 disk and then restart.
