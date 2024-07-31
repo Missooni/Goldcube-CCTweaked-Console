@@ -1,0 +1,19 @@
+ff                                                   
+ff 8Editing gamefileDefault Part 2f              8 Pg.6f 
+ff 4You can change how some variables will appear     
+ff 4when drawn on the stats page by definingf 4'max'  f  
+ff 4or 'tag' values. Only one will work at a time.f    
+ff 9          4             f                           
+ff 1Display Options:f                                  
+ff  4> Defaultf                                        
+ff  9stat1 = 5 7Output: 5 8        4 f                    
+ff                                                   
+ff  4> Drawn as a meter 9(max)f                         
+ff  9stat1 = 5f                                        
+ff  9stat1max = 107 Output: be    e    f 4 f                 
+ff                                                   
+ff  4> Drawn with a prefix 9(tag)f                      
+ff  9stat1 = 5f                                        
+ff  9stat1tag = "Days left: "f 7Output: Days left: 5f    
+ff                          7* tags can be used with  
+ff                            7     all values   f     

@@ -1,0 +1,19 @@
+ff                                                   
+ff 8Writing Stage Files Part 1f                  8 Pg.8f 
+ff 4Each stage is a text file, named anything you     
+ff 4want.f 4They will contain all of your gameplay      
+ff 4elements.f 4It's optional if you want to add thef    
+ff 4file extension, but you must write the completef   
+ff 4stage name in all references to it.f               
+ff                                                   
+ff 1Now, here is a complete glossary of Goldscriptf    
+ff 1syntax with usage examples:f 7( First two spaces    
+ff 7|0                     f     7of each line used forf  
+f8 7|0>8 Print text quickly0   f  7   reading 0commands7 )  f 
+f8 7|> string  f                                       
+f8 7|f                                                 
+f8 7|0>!8Print text instantly7 f                          
+f8 7|>!stringf                                         
+ff 7|f                                                 
+ff 7|0>?8Print text slowlyf                              
+ff 7|>?stringf                                         

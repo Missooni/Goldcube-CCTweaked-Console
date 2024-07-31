@@ -1,0 +1,19 @@
+ff 8                          f                        
+ff 8Writing Stage Files Part 5f                  8Pg.12 
+ff 7|f                                                 
+ff 7|0? [8stat0+810] 7Manually set or compare variables f    
+ff 7|? [stat(op)value] f   7without needing user inputf  
+ff 7|f                                                 
+ff 7|When using <, > r = this command will ONLY run   
+ff 7|f                  7the next line if return = truef 
+ff 7|0?7 0[8stat0=810]f                                       
+ff 7|0>7 8Output is true!f                                
+ff 7|f                                                 
+ff 7|If you use a comma as an operation here, you can 
+ff 7|let a user manually assign a value by typing     
+ff 7|into the terminal.f                               
+ff 7|f                                                 
+ff 7|0? [8stat0,8Example string0]f 7   f                      
+ff 7|Your string will be the prompt that displays on  
+ff 7|the screen to let users know they need to input  
+ff 7|a value. Input can always be a string or number. 

@@ -1,0 +1,19 @@
+ff                                                   
+ff 8Writing Stage Files Part 2f                  8 Pg.9f 
+ff 7|f                                                 
+ff 7|0v 7Waits for user touch input to proceed,f 7createsf 
+ff 7|vf 7 f                                   7 a newlinef 
+ff 7|f                                                 
+ff 7|0v>7Wait for user touch input to proceed, does notf 
+ff 7|v>f                              7create a newlinef 
+ff 7|f                                                 
+ff 7|0v 81.57 Wait for a certainf 7amount of seconds, then 
+ff 7|v0 7intf              7 proceed and create a newline 
+ff 7|f                                                 
+ff 7|0v>81.50 7Wait for a certain amount of seconds, thenf 
+ff 7|v>intf           7proceed without making a newline 
+ff 7|f                                                 
+ff 7|0  f                                               
+ff 7|Touch commands detect player right-clicks onf     
+ff 7|any external monitor.f                            
+ff 7|f                                                 

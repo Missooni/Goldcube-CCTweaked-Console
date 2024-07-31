@@ -1,0 +1,17 @@
+{
+  butCol1 = "e",
+  barCol1 = "e",
+  barCol2 = "b",
+  D1TxtCol = "0",
+  D2TxtCol = "0",
+  D3TxtCol = "0",
+  D4TxtCol = "0",
+  palette = "gcp1",
+  butTxtCol1 = "0",
+  butCol2 = "b",
+  D1Col = "1",
+  D3Col = "e",
+  D2Col = "d",
+  butTxtCol2 = "0",
+  D4Col = "b",
+}

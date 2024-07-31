@@ -1,0 +1,178 @@
+-- Do auto update?
+local auto = false
+
+--[[
+    ###INFO###
+    * Language
+       Lua (ComputerCraft)
+       
+    * Version
+       1.3
+       
+    * Status
+       Working, not closed.
+]]--
+
+--[[
+    cPrint API by Jesusthekiller
+    This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License.
+	More info: http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US
+]]--
+
+--[[
+	Big thanks to theorginalbit for help with cCode and toCode!
+]]--
+
+--[[
+    Version log:
+    1.0:
+     * Initial release
+    
+    1.1:
+     * Added cwrite
+     * Added update
+     * cprint now adds "\n" to the end of the line
+     * Improved cCode
+     * Improved toCode
+     * Auto updater
+	 
+    1.2:
+     * Added non-advanced computer support
+     * Bugfixes
+
+    1.3:
+     * Even better non-advanced computer support
+]]--
+
+local DO_NOT_TOUCH = 5
+
+-- Updater func:
+
+function update()
+	if not http then
+		error("HTTP API required!")
+	end
+	
+	cprint("&5Checking for &4cprint &5update...")
+	
+	local v = http.get("http://mindblow.no-ip.org/code/cprint/ver")
+	
+	if v == nil then
+		error("nil response from update server! Check your internet connection!")
+	end
+	
+	if tonumber(v.readLine()) <= DO_NOT_TOUCH then
+		cprint("&5No new updates!")
+		return false
+	end
+	
+	-- Install cPrint
+	
+	cprint("&5Downloading &4cPrint&5...")
+	
+	local f = http.get(v.readLine())
+	
+	cprint("&5Installing &4cPrint&5 as &4cprint &5in main directory...")
+	
+	local e = fs.open("cprint", "w") -- API Folder
+	
+	e.write(f.readAll())
+	
+	e.close()
+	f.close()
+	
+	-- Install palette
+	
+	cprint("&5Downloading &4Palette&5...")
+	
+	local f = http.get(v.readLine())
+	
+	v.close()
+	
+	cprint("&5Installing &4Palette&5 as &4palette &5in main directory...")
+	
+	local e = fs.open("palette", "w") -- API Folder
+	
+	e.write(f.readAll())
+	
+	e.close()
+	f.close()
+	
+	v.close()
+	print("Done!")
+	return true
+end
+
+function sc(x, y)
+    term.setCursorPos(x, y)
+end
+
+function clear(move)
+    sb(colors.black)
+    term.clear()
+    if move ~= false then sc(1,1) end
+end
+
+function sb(color)
+    term.setBackgroundColor(color) 
+end
+
+function st(color)
+    term.setTextColor(color)
+end
+
+function cCode(h)
+	if term.isColor() and term.isColor then
+		return 2 ^ (tonumber(h, 16) or 0)
+	else
+		if h == "f" then
+			return colors.black
+		else
+			return colors.white
+		end
+	end
+end
+
+function toCode(n)
+	return string.format('%x', n)
+end
+
+function cwrite(text)
+	text = tostring(text)
+	
+	local i = 0
+    while true  do
+		i = i + 1
+		if i > #text then break end
+		
+        local c = text:sub(i, i)
+
+		if c == "\\" then
+            if text:sub(i+1, i+1) == "&" then
+                write("&")
+                i = i + 1
+            elseif text:sub(i+1, i+1) == "$" then
+                write("$")
+                i = i + 1
+			else
+				write(c)
+            end
+        elseif c == "&" then
+            st(cCode(text:sub(i+1, i+1)))
+            i = i + 1
+        elseif c == "$" then
+            sb(cCode(text:sub(i+1, i+1)))
+            i = i + 1
+        else
+            write(c)
+        end
+    end
+	
+	return
+end
+
+function cprint(text)
+	return cwrite(tostring(text).."\n")
+end
+
+if auto then update() end

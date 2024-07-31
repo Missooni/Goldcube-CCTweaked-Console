@@ -1,0 +1,1 @@
+goldcubeapi.initiate()

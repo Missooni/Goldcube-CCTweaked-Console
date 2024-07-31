@@ -1,0 +1,19 @@
+ff                                                   
+ff 8Writing Stage Files Part 6f                 8 Pg.13f 
+ff 7|f                                                 
+ff 7|0- 8anchor 7Creates an anchor which will skip everyf 
+ff 7|- anchorf          7line until it hits another     
+ff 7|> Skipped code    anchor that shares the same   0 
+ff 7|- anchorf                                   7name.f 
+ff 7|8       f                                          
+ff 7|You can use the same name for more than two      
+ff 7|anchors, but they will always move down to the f  
+ff 7|closest match in their path. All anchors must    
+ff 7|have another anchor to wrap to.f                  
+ff 7|f                                                 
+ff 7|0-*[8x0][8x0][8x0][8x0]8 7Create anchors in the form of af   
+ff 7|-*[x] or f       7D-pad on the lower screen the    
+ff 7|[label|anchor]f  7user can choose from. At least  n
+ff 7|f                7one anchor should be defined.f    
+ff 7|Must have values inside all four brackets.f 7use xf 
+ff 7|to avoid drawing buttons. Follows N-S-W-E format.

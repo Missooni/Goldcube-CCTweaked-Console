@@ -1,0 +1,49 @@
+! Goldcube Retro Palette
+
+*.color0:     #1d1209
+! color0= black
+
+*.color8:     #4c270c
+! color8= gray
+
+*.color1:     #b66108
+! color1= brown
+
+*.color9:     #9f4a0c
+! color9= red
+
+*.color2:     #e49500
+! color2= green
+
+*.color10:    #e4bb29
+! color10= light green
+
+*.color3:     #d88012
+! color3= orange
+
+*.color11:    #ffe226
+! color11= yellow
+
+*.color4:     #773b0d
+! color4= blue
+
+*.color12:    #a28226
+! color12= light blue
+
+*.color5:     #ca7d04
+! color5= purple
+
+*.color13:    #f2d206
+! color13= magenta
+
+*.color6:     #e4af00
+! color6= teal
+
+*.color14:    #d8bd72
+! color14= pink
+
+*.color7:     #63542a
+! color7= light gray
+
+*.color15:    #fffacd
+! color15= white

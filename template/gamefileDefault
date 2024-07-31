@@ -1,0 +1,28 @@
+;Your default map can be named anything
+; but the file must exist!
+;You should not name this variable anything but
+; 'savestate'
+savestate = 1
+
+;Stats that follow the 'stat#' naming convention
+; numbered 1-19 will be rendered on the screen.
+;Anything beyond this range is hidden but still
+; accessible via code.
+;You should not rename the label in brackets.
+[Stats Page]
+stat2 = "  &8Character Stats&0"
+stat3 = Strength
+stat4 = 5
+stat4max = 10
+stat5 = Speed
+stat6 = 5
+stat6max = 10
+stat7 = Intelligence
+stat8 = 5
+stat8max = 10
+stat10 = "  &8Relationships&0"
+stat11 = "  Baba loves you &6\003"
+stat13 = "  &8Inventory&0"
+stat14 = "  You have no items"
+stat16 = 25
+stat16tag = "  &1Money&4 \162"

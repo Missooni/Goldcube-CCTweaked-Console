@@ -1,0 +1,49 @@
+! Goldcube Classic Palette
+
+*.color0:     #0d0d0d
+! color0= black
+
+*.color8:     #2E2E2E
+! color8= gray
+
+*.color1:     #7a5b3c
+! color1= brown
+
+*.color9:     #d74349
+! color9= red
+
+*.color2:     #35af28
+! color2= green
+
+*.color10:    #6cd608
+! color10= light green
+
+*.color3:     #fda635
+! color3= orange
+
+*.color11:    #eded54
+! color11= yellow
+
+*.color4:     #2843c8
+! color4= blue
+
+*.color12:    #85a8ff
+! color12= light blue
+
+*.color5:     #9c58e6
+! color5= purple
+
+*.color13:    #f95cb0
+! color13= magenta
+
+*.color6:     #40a3bf
+! color6= teal
+
+*.color14:    #ffa7cc
+! color14= pink
+
+*.color7:     #636363
+! color7= light gray
+
+*.color15:    #f6f6f6
+! color15= white

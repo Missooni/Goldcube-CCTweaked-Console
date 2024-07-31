@@ -1,0 +1,19 @@
+ff                                                   
+ff 8Writing Stage Files Part 8f                 8 Pg.15f 
+ff 7|f                                                 
+ff 7|0~ 8stagenamef 7Change to another stage file in thef  
+ff 7|          f  7'/gcgame/stages/' folder.f 7Can be inf  
+ff 7|f                        7     a nested directory f 
+ff 7|f                                                 
+ff 1Available Operations:f                             
+ff  8 state-8value 7= subtract value from stat  f         
+ff 8  state+8valuef 7= add value to statf                  
+ff   8state*8valuef 7= multiply stat by valuef             
+ff   8state/8valuef 7= divide stat by valuef               
+ff   8stata<8valuef 7= pass true if stat less than value*f 
+ff   8stata>8valuef 7= pass true if stat more than value*f 
+ff   8stata=8valuef 7= pass true if stat equals value*f    
+ff   8stat9:8value7 = change stat to valuef               
+ff   8stat9?8maxnumf 7= change stat to randomly rolled #  
+ff   8stat5,8stringf 7= let user define value*            
+ff   7* only for ? commands. a= 7can also compare text  

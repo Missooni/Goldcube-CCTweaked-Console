@@ -1,0 +1,19 @@
+ff                                                   
+ff 8Writing Stage Files Part 9f                  8Pg.16f 
+ff 4You can use 3c9Print4 formatting in values and mostf  
+ff 4commands, whereas 8$4 will set background color,f    
+ff 4and 8&4 will set text color.f                 7 f      
+ff                                                   
+ff 1Example:f                                          
+ff 7$3&bText 4becomes 3bTextff 4when drawn.f                 
+ff                                                   
+ff 4Newlines (7\n4), horizontal tabs (7\t4) and mostf 4     
+ff 4unicode symbols such as 7\3 4can be added to stagef  
+ff 4files, but you must always format numbers withf    
+ff 4three digits.7 \3 4should be7 4written as 7\003f        
+ff                                                   
+ff 4If you want to display a value you've set in your 
+ff 4gamefile in a string or label, escape the name inf 
+ff 4underscores like 7_this_8   f                        
+ff                                                   
+ff                                                   

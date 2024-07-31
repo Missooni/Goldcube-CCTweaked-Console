@@ -1,0 +1,19 @@
+ff                                                   
+ff 8Writing Stage Files Part 10f                 8Pg.17f 
+ff 4If you want to compare values to other values,    
+ff 4you should use underscores as well.7         f      
+ff 4(7stat1=_stat2_4)f                                   
+ff 4                      f                            
+ff 4You can also use values in place of anchor names,f 
+ff 4as long as the value references an existingf       
+ff 4anchor. f                                          
+ff                                                   
+ff 4For user accessibility, game files can'tf 4manuallyf 
+ff 4change the colors of D-pad and button labels, butf 
+ff 4they can use unicode characters.f                  
+ff                                                   
+ff 4Some characters (like 7:4) can break formattingf 4when
+ff 4used in a stat tag, you can replace them withf 4the 
+ff 4unicode equivilent (7\0584)f                         
+ff  7* Each game start noise is randomly4 7generatedf    
+ff 4   7based on the disk label.4                     f  

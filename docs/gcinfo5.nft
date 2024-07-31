@@ -1,0 +1,19 @@
+ff                                                   
+ff 8Editing gamefileDefaultf 8Part 1f             8  Pg.5f 
+ff 4You can set all of the          f                  
+ff 4variables that your game 1 Formatting Example:f     
+ff 4will use by editing thef    0  esavestate = 1f        
+ff 0'gamefileDefault'4 file.f      e[Stats Page]f         
+ff                              9stat1 = "Name"f       
+ff 4You must include the      f   9stat2 = "Rusty"8  f    
+f4 e[Stats Page]0 4tag in every f   9stat3 = 6f            
+f4 game, but you are not        9stat3tag = "Age:"8 f   
+ff 4required to define values.f   9stat4 = "Progress"f   
+ff 4                   f     0  4 f  9stat5 = 0 f           
+ff 4Only variables named 9'stat#'f 9stat5max = 10f        
+ff 4from numbers 91-194 will show 8 9collected = "bone"f   
+ff 4on the stats page in games.f  8                f     
+ff 4The number correlates to the  e* required in filef  
+ff 4line they are drawn on.f       9* optional valuesf   
+ff 3                            4   8 9defined by users8 f 
+ff 3                            4                     f 

@@ -1,0 +1,47 @@
++ block.note_block.harp[1,1]
+v>0.15
++ block.note_block.harp[1,1.2]
+v>0.15
++ block.note_block.harp[1,1.6]
+> &9$fPrint text quickly
+v>
++ ui.button.click[0.25,1]
+[$8
+>!&ePrint text\n instantly \002
+v
++ ui.button.click[0.25,1]
+[ img2.nft
+>?&2Print text slowly
+v
+> &8Print values using\n underscores\n&3stat4 = _stat4_
+v>1
+{ img1.nft[1,1]
+v>1
+{ img3.nft[9,3]
+v>
++ ui.button.click[0.25,1]
+{>Print text on the screen \015[14,0][0,f]
+v>1
+{>Text can be drawn in any color[14,23][f,1]
++ ui.button.click[0.25,1]
+v>
+{>                              [14,23][0,1]
+{>Use print with spaces to 'erase'\ntext on the screen.[10,20][f,2]
+v>
++ ui.button.click[0.25,1]
+[ 
+v>
++ ui.button.click[0.25,1]
+* button|button[stat4-2][stat4+2]
+? [stat4>4]
+- anchorname1
+? [stat4<5]
+- anchorname2
+- anchorname1
+>!&bAnchor one outcome
+v 0.05
+~ 2
+- anchorname2
+>!&eAnchor two outcome
+v 0.05
+~ 2

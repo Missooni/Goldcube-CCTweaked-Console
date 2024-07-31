@@ -1,0 +1,19 @@
+ff                                                   
+ff 8Writing Stage Files Part 7f                  8Pg.14f 
+ff 7|f                                                 
+ff 7|0-^[8a10][8a20][8a30][8a40][8a50][8a60][8a70][8a80][8a90]f           
+ff 7|   f                                              
+ff 7|Creates anchors in the form of interactive       
+ff 7|regions on your upper monitor the user can rightf 
+ff 7|click. If you do not need functionality for any  
+ff 7|of these regions, you can write [x] instead.f     
+ff 7|f                                                 
+ff 7|When using this command8 7you can assign multiple  
+ff 7|regions to the samef 7anchor. This will always     
+ff 7|follow a N-C-S-NW-W-SW-NE-E-SE format.      f     
+ff 7|f                                                 
+ff 7|Using this command does not draw any new imagesf  
+ff 7|or labels on your monitors. Example of 9'left'f    
+ff 7|and 2'right'7 movement options:                    
+ff 7|0-^[8x0][8x0][8x0][9L0][9L0][9L0][2R0][2R0][2R0]7                    
+ff 7|f                                                 

@@ -1,0 +1,19 @@
+ff                                                   
+ff 8Writing Stage Files Part 4f                  8Pg.11f 
+ff 7|f                                                 
+ff 7|0+ 8ui.button.click0[810,810]8 7Play a noise on thef       
+ff 7|+ sound[volume,pitch]f                 7   speaker 
+ff 7|f                                                 
+ff 7|Uses the block file names from sounds.json,      
+ff 7|available to reference on the officialf 7Minecraftf 
+ff 7|f                                           7 wikif 
+ff 7|0* 8label0|8label0[8stat0+850][8stat0-850]    f 7       f        
+ff 7|* label1|label2[stat(op)value][stat(op)value]f    
+ff 7|f                                                 
+ff 7|Creates two buttons on the lower screen for the f 
+ff 7|user to choose from. All button and D-Pad labelsf 
+ff 7|can only be up to 6 characters in length.f        
+ff 7|f                                                 
+ff 7|All available operations can be viewed further   
+ff 7|down.f                                            
+ff 7|f                                                 

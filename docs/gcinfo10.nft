@@ -1,0 +1,19 @@
+ff                                                   
+ff 8Writing Stage Files Part 3f                  8Pg.10f 
+ff 7|f                                                 
+ff 7|0[ 8bgimage.nft7 Change the current backgroundf      
+ff 7|[ filename.extf                       7   image f   
+ff 7|f                                                 
+ff 7|0[$8ff 7Change the background color on the upper     
+ff 7|[$color     monitor and redraw the background img
+ff 7|f                                        7       f  
+ff 7|0{>8Print text on the image monitor0[810,810][800,8f0]f      
+ff 7|{>string[x,y][bgColor,txtColor]f                  
+ff 7|f                                                 
+ff 7|0{ 8character.nft0[810,810]f  7Draw an image on the upperf 
+ff 7|{ filename.ext[x,y]f                      7monitor 
+ff 7|          f                                       
+ff 7|The upper monitor is 57x24. All images must exist
+ff 7|in '/gcgame/images/' but they can be nested in f  
+ff 7|You can print blank characters to      f 7folders.f 
+ff 7|'erase' text on the upper monitor or draw bars.f  

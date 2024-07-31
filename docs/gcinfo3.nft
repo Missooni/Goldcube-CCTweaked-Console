@@ -1,0 +1,19 @@
+ff                                                   
+ff 8Accessibility Features for Playersf          8 Pg.3f 
+ff 4You can change the colors used for statf 4bars,f     
+ff 4buttons, and the in-game D-pad by editing the f    
+ff 4'gcsystem' settings file. These values usef 3c9Printf 
+ff 1Alias Key: f                              4aliases.f 
+ff  00 - white    8| 11 - orange   8| 22 - pink    f       
+ff  33 - l.bluef   8|f 44 - yellowf   8| 55 - l.greenf        
+ff 6 6 - l.pink   8| 77 - gray8     | 8 - l.grayf         
+ff  99 - teal     8| aa - purple8   | bb - bluef           
+ff  cc - brown 8   | dd - green 8   | ee - redf            
+ff  5        f       8 f             0 f - black f         
+ff 1Custom Color Palettes: 8   1     0    f               
+ff 4By default, you have two palettes, gcp1 and gcp2  
+ff 4You can add more using these files as templates.  
+ff 4 * A name must be defined in 'palettecfg' file.f   
+ff  4* Palettes must follow the 'gcp#' file namef      
+ff                         4             formatting.  
+ff                                                   

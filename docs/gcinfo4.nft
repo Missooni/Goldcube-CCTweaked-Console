@@ -1,0 +1,19 @@
+ff                                                   
+ff 8Guide to Creating Goldcube Gamesf 8   f        8 Pg.4f 
+ff 4If you attempt to play a floppy disk that does    
+ff 4not contain a 'gcgame' folder, the system will    
+ff 4copy a game template to the disk and then restart.
+ff 4After the restart, the floppy disk will be        
+ff 4playable and ready to edit.                  f     
+ff 4                                                f  
+ff 4Use the cmd "label set right 'diskname'" to name  
+ff                                        4your games.
+ff 1Game disks should contain the following folders f  
+ff 0'/gcgame/'f 8<- game resourcesf      1    and files:  
+ff 0'/gcgame/menu.nft' 8<- optional startup img      f  
+ff 0'/gcgame/game.lua' 8<- 'goldcubeapi.initate()'   f  
+ff 0'/gcgame/gamefileDefault' 8<- game variablesf       
+ff 0'/gcgame/images/'f 8<- game image folderf            
+ff 0'/gcgame/stages/'f 8<- game stages folderf           
+ff 0'/gcgame/stages/1'f 8<- default game stage        f  
+ff               7   (games need at least one stage)f  

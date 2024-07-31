@@ -1,0 +1,19 @@
+ff                                                   
+ff 8Editing gamefileDefault Part 3f             8  Pg.7f 
+ff 4Your game file should always have a e'savestate'4 f  
+ff 4value above the necessary e[Stats Page] 4tag.e 4     f 
+ff 4                                                 f 
+ff 4Any values written above e[Stats Page]4 will not   f 
+ff 4be read by games, except for e'savestate'4.f         
+ff                                                   
+ff 4In your default game file, you can use e          f 
+ff e'savestate' 4to define what stage playersf 4willf     
+ff  4start in when they play your game for thef        
+ff 4first time.f                         4            f  
+ff 4                                              f    
+ff 4When stage files are loaded through gameplay,f     
+ff 4the console auto-saves your progress and      f    
+ff 4overwrites this value.f                            
+ff                                                   
+ff                                                   
+ff                                                   

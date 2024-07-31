@@ -1,0 +1,30 @@
++ block.note_block.cow_bell[1,1]
+v>0.15
++ block.note_block.cow_bell[1,0.8]
+> &9This is the\nsecond stage file
+v 
+? [stat16,&1How much money\n should you have?&4]
+v 0.15
+> You have _stat16_ cents.
+v>
++ ui.button.click[0.25,1]
+-*[top|topanchor][bottom|bottomanchor][left|leftanchor][right|rightanchor]
+- topanchor
+> Top outcome.
+v
+~ 3
+
+- leftanchor
+> Left outcome.
+v
+~ 3
+
+- rightanchor
+> Right outcome.
+v
+~ 3
+
+- bottomanchor
+> Bottom outcome.
+v
+~ 3
