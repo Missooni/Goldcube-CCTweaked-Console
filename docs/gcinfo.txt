@@ -137,17 +137,17 @@ syntax: >?string
 
 ---
 Writing Stage Files Part 2
-v Wait for any user touch input to proceed, creates a newline
+v Wait for any user touch input to proceed, creates a 
 syntax:v
 
-v>Wait for user touch input to proceed, does not create a newline
+v>Wait for user touch input to proceed, does not create a 
 syntax:v>
 
 v 1.5 Wait for a certain amount of seconds, and then proceed after making a newline
 syntax:v int
 
 v>1.5 Wait for a certain amount of seconds, then proceed without making a newline
-syntax:v int
+syntax:v>int
 
 Touch commands detect player right-clicks on any external monitor.
 
@@ -223,7 +223,7 @@ Writing Stage Files Part 7
 -^[a1][a2][a3][a4][a5][a6][a7][a8][a9] 
 
 Creates anchors in the form of 
-interactive regions on your upper monitor the user can right click. If you do not need functionality for any of these regions, you can wrote [x] instead.
+interactive regions on your upper monitor the user can right click. If you do not need functionality for any of these regions, you can write [x] instead.
 When using this, you can assign multiple regions to the same anchor. This will always follow a N-C-S-NW-W-SW-NE-E-SE format.
 Using this command does not draw any new images or labels on your monitors.
 Example of 'left' and 'right' movement options:
