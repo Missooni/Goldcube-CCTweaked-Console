@@ -1,0 +1,19 @@
+ff                                                   
+ff 8API Guide Part 5f                           8 Pg.29f 
+ff 7|f                                                 
+ff 7|surface - Easily display images andf 7text on f     
+ff 7|f          7terminals and monitors.f                
+ff 7|f                                                 
+ff 7|8local surfapi 0= dofile(8"/gcDir/apis/surface"0)f    
+ff 7|f                                                 
+ff 7|8surfbg 0= 8colors.blackf                            
+ff 7|8surface 0= 8surfapi0.create(8510, 8190,8 surfbg0)f         
+ff 7| f           7.create will make a surface windowf   
+ff 7|f            7in any size. The standard resolutionf 
+ff 7|f                         7for terminals is 51x19f  
+ff 7|8surfimg 0= 8surfapi0.load(8"/filepath"0)f              
+ff 7|8surface0:drawSurface(8surfimg0, 800, 800)f               
+ff 7|f            7:drawSurface will draw a loaded image
+ff 7|f                     7or surface on top of another
+ff 7|f                                    7     surface.
+ff 7|f                                                 

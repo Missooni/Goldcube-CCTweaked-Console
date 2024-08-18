@@ -1,0 +1,19 @@
+ff                                                   
+ff 8API Guide Part 3f                            8Pg.27f 
+ff 7|f                                                 
+ff 7|palette - Recolor the terminal and any wrapped   
+ff 7|f          7      monitor using palette files.f     
+ff 7|f         7 This is not an API, but a runnable     
+ff 7|f          7program. Here's an example with syntax:
+ff 7|f                           7 f                     
+ff 7|0/gcdir/apis/palette /gcDir/apis/cfg/gcp1f         
+ff 7|palette palettefilef                              
+ff 7|f                                                 
+ff 7|To reset any terminal or monitor palette:     f   
+ff 7|0/gcdir/apis/palette --resetf                      
+ff 7|f                                                 
+ff 7|f                                                 
+ff 7|f                                                 
+ff 7|f                                                 
+ff 7|f                                                 
+ff 7|f                                                 

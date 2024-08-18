@@ -1,0 +1,19 @@
+ff                                                   
+ff 8API Guide Part 6f                            8Pg.30f 
+ff 7|f                                                 
+ff 7|8surface0:drawString(8string0, 8x0,8 y0, 8bgCol0, 8txtCol0)f  
+ff 7|f                                                 
+ff 7|When you're done assigning elements to a surface,
+ff 7|use :output to draw it on a monitor.             
+ff 7|                            f                     
+ff 7|8surface0:output()f                                 
+ff 7|orf                                               
+ff 7|8surface0:output(8monitorObj0,8 x0, 8y0)f                 
+ff 7|f                                                 
+ff 7|f                                                 
+ff 7|f                                                 
+ff 7|f                                                 
+ff 7|f                                                 
+ff 7|f                                                 
+ff 7|f                                                 
+ff 7|f                                                 

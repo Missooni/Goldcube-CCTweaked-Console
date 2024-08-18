@@ -1,0 +1,19 @@
+ff                                                   
+ff 8API Guide Part 4f                            8Pg.28f 
+ff 7|f                                                 
+ff 7|settingfile - Create configuration files in af    
+ff 7|f              7simpler format than the defaultf    
+ff 7|File setup example: 0      7        Settings API.f  
+0f 7|8value = 5  7     f        7|8value : 5f               
+0f 7|8[Section Name]f          7|8[Section Name]f          
+0f 7|8secval = stringf         7|8secval : stringf         
+ff 7|f    7  Style 1f                  7 Style 2  f        
+ff 7|8file 0= settingfile.openSettingsFile(8"/filepath"0) 
+ff 7|8                                                 
+ff 7|8file0.setValue(8"valname"0,8"value"0)f 7Values can be f  
+ff 7|0                                 7organized underf 
+ff 7|8file0.getValue(8"valname"0)f   7    named [sections]. 
+ff 7|f                         7Use ; to write comments.
+ff 7|8file0.setSectionedValue(8"section"0,8"valname"0,8"val"0)
+ff 7|f                                                 
+ff 7|8file0.getSectionedValue(8"section"0,8"valname"0)f      

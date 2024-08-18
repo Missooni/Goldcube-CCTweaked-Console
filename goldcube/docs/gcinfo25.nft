@@ -1,0 +1,19 @@
+ff                                                   
+f8 API Guide Part 1   f                         8Pg.25f 
+ff 7|f                                                 
+ff 7|goldcubeAPI - Contains some generic functions f   
+ff 7|and everything used to run Goldcube games.f       
+ff 7|Most functions are not made to be used on their  
+ff 7|f                                             7own.
+ff 7|0goldcubeapi.delay(8seconds0)7 Similar to os.sleep,f  
+ff 7|f                      7      doesn't drop inputs.f 
+ff 7|0goldcubeapi.moveMousePos(8x0,8y0)f                    
+ff 7|f                 7Move cursor relative to current 
+ff 7|f               7position, accepts negative values.
+ff 7|0goldcubeapi.easyTouch()f                          
+ff 7|f                7 Waits until user touches one off 
+ff 7|f               7 f 7the external monitors before f   
+ff 7|0goldcubeapi.initiate(8gameDir0)7         proceeding.
+ff 7|f                 7Launch a game. Needs to pointf   
+ff 7|f              7to a valid 'folder/' which contains
+ff 7|f              7a gamefile and at least one stage.f 

@@ -1,0 +1,19 @@
+ff                                                   
+ff 8Making Plugins             f                 8Pg.24f 
+ff 4Programs designed to be pluginsf 4will have accessf  
+ff 4to all of the APIs that come installedf 4with f      
+ff 4Goldcube, on top of whatever APIs or programs you 
+ff 4have installed to your system already.  f          
+ff 4Usef                                               
+ff 4'multishell.setTitle(multishell.getCurrent(),"t") 
+ff 4in your init.lua to set the tab name whenf 4launched
+ff 4in multishell.f                                    
+ff                                                   
+ff 1Here's some light documentation on Goldcubef       
+ff 1console APIs, and some of their functions:f        
+ff                                                   
+ff                                                   
+ff                                                   
+ff                                                   
+ff                                                   
+ff                                                   

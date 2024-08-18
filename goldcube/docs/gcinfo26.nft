@@ -1,0 +1,19 @@
+ff                                                   
+ff 8API Guide Part 2f                          8  Pg.26f 
+ff 7|f                                                 
+ff 7|cprint - Print and write colored text usingf      
+ff 7|0cprint.cCode(8val0)7               formatting tags f 
+ff 7|f    7Converts formatting codes   View key on Pg.3 
+ff 7|0cprint.cprint(8string0)7  into colors.* vars.       
+ff 7|f         7print() with formatting.f                
+ff 7|0cprint.cwrite(8string0)f                            
+ff 7|f         7write() with formatting.f                
+ff 7|0cprint.clear()f                                   
+ff 7|f         7Resets foreground, background   f        
+ff 7|f         7color and mouse position in terminal.f   
+ff 7|f                                                 
+ff 7|escalias - Fixes text read from files.       f    
+ff 7|0escalias.fix(8string0) f                            
+ff 7|f        7Parses newlines, tabs, and unicode    f   
+ff 7|0escalias.parseOps(8val10,8op0,8val20)7 read from files.f 
+ff 7|f 7Parses math equations from text, such as "8*3" f 

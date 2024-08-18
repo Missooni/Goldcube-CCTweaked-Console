@@ -1,0 +1,19 @@
+ff                                                   
+ff 8Update 1.4 - Changelogf                      8Pg.22 
+ff 4 * It is now possible to create plugins.f          
+ff 4 There is a new 'plugins' directory and some f     
+ff  4documentation on doing so. The console menuf      
+ff  4now features a little plug icon you can interactf 
+ff  4with to view installed plugins.                 f 
+ff                                                   
+ff  4* Games can run from any directory now, but the f 
+ff  4'Play Game Disk' functionality remains unchanged.
+ff  4Template has been updated, game.lua nowf 4containsf 
+ff  4'initiate(fs.getDir(shell.getRunningProgram()))' 
+ff  4This line of code is required for games to run.f  
+ff                                                   
+ff                                                   
+ff                                                   
+ff                                                   
+ff                                                   
+ff                                                   

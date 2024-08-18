@@ -1,0 +1,19 @@
+ff                                                   
+ff 8Update 1.4 - Changelogf                      8Pg.21f 
+ff 4 *  Console files are now portable, allf           
+ff  4dependencies must exist in the same directory or 
+ff  4folder. API files are now contained inside of    
+ff  4the 'apis' folder. Palettes and system settings  
+ff  4are inside 'apis/cfg/'0 4The folder containing the 
+ff  4console start animation has been moved inside of 
+ff  4'docs'.f                                          
+ff                                                   
+ff  4* The console is now compatible with multishell!f 
+ff  4If you want to reset the color palette in a f     
+ff  4specific shell, use "apis/palette --reset" If    
+ff  4you're running the system from a folder called f  
+ff  4'goldcube' the command will be                   
+ff                  4"goldcube/apis/palette --reset" f 
+ff                                                   
+ff                                                   
+ff                                                   

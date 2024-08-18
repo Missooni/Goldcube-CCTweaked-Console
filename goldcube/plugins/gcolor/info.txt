@@ -1,0 +1,12 @@
+
+  GColor 
+  by Missooni
+  
+  * Create 
+      palettes!
+  
+  * Set colors 
+    for buttons
+    and labels!
+  
+  

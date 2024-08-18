@@ -1,13 +1,17 @@
 
 function parseOps(val1, op, val2)
-    math.randomseed(os.time() - os.clock() * 1000)
+	if op == "?" then
+    math.randomseed(os.clock()*1000)
+	end
+	 if tonumber(val1) ~= nil then val1 = tonumber(val1) end
+     if tonumber(val2) ~= nil then val2 = tonumber(val2) end
     return operators[op](val1, val2)
 end
 
 operators = {
-    [">"] = function(x,y) return tostring(x) > tostring(y) end,
-    ["<"] = function(x,y) return tostring(x) < tostring(y) end,
-    ["="] = function(x,y) return tostring(x) == tostring(y) end,
+    [">"] = function(x,y) return x > y end,
+    ["<"] = function(x,y) return x < y end,
+    ["="] = function(x,y) return x == y end,
     ["+"] = function(x,y) return x + y end,
     ["-"] = function(x,y) return x - y end,
     ["/"] = function(x,y) return x / y end,

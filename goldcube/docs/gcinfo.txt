@@ -52,7 +52,7 @@ You can add more using these files as guidelines.
 
 --- 
 
-Guide To Creating Games Pt1
+Guide To Creating Goldcube Games
 If you attempt to play a floppy disk that does not contain a
 'gcgame' folder, the system will copy a game template to the 
 disk and then restart.
@@ -63,7 +63,7 @@ Game disks should contain the following folders and files:
 (files should not be renamed or converted to other formats)
 'gcgame/' <- game resources
 'gcgame/menu.nft' <- optional startup img
-'gcgame/game.lua' <- 'goldcubepai.initiate()'
+'gcgame/game.lua' <- contains startup script
 'gcgame/gamefileDefault' <- game variables
 'gcgame/images/' <- game image folder
 'gcgame/stages/' <- game stages folder
@@ -295,3 +295,131 @@ This could not have existed without the APIs used to bring game functions togeth
 Thank You!
 
 Outside of Minecraft, I'm a furry artist with a coding hobby. You can visit me on FurAffinity @ Missooni.
+
+---
+
+Update 1.4 - Changelog
+* Console files are portable, all dependencies must exist in the same directory or folder.
+API files are now contained inside of the 'apis' folder, palettes and system settings are
+inside 'apis/cfg'. The folder containing the console start animation has been moved inside of 'docs'.
+
+* The console is now compatible with multishell! If you want to reset the color palette in a specific shell, use
+"apis/palette --reset" If you're running the system from a folder called 'goldcube' the command will be "goldcube/apis/palette --reset"
+
+---
+
+Update 1.4 - Changelog
+* It is now possible to create plugins. There is a new 'plugins' directory and some documentation on doing so.
+The console menu now features a little plug icon you can interact with to view installed plugins.
+
+* Games can run from any directory now, but the 'Play Game Disk' functionality remains unchanged.
+Template has been updated, game.lua now contains 'initiate(fs.getDir(shell.getRunningProgram()))'
+This line of code is required for games to run.
+---
+
+Making Plugins
+All plugins need their own folder in the 'plugins' directory.
+(It can be named anything)
+"/consoleDir/plugins/yourPlugin"
+
+Inside this folder, create two files, 'init.lua' and 'info.txt'
+The console will display folder names from the 'Installed Plugins' menu.
+'init.lua' will be the script used when your plugin is launched.
+
+---
+
+Making Plugins
+Programs designed to be plugins will have access to all of the APIs that come installed with Goldcube, on
+top of whatever APIs or programs you have installed to your system already.
+Use 
+multishell.setTitle(multishell.getCurrent(), "t")
+in your init.lua to set the tab name when launched in multishell.
+
+Here's some light documentation on Goldcube console APIs and some of their functions:
+
+---
+
+API Guide Part 1
+
+goldcubeAPI - Contains some generic functions and everything used to run Goldcube games. 
+Most functions are not made to be used on their own.
+
+goldcubeapi.delay(seconds) Similar to os.sleep, doesn't drop inputs.
+goldcubeapi.moveMousePos(x,y) Move cursor relative to current position, accepts negative values.
+goldcubeapi.easyTouch() Waits until user touches one of the external monitors before proceeding.
+goldcubeapi.initiate(gameDir) Launch a game. Needs to point to a valid "folder/" which contains a gamefile and at least one stage.
+
+---
+API Guide Part 2
+
+cprint - Print and write colored text using formatting tags. All codes are available on Pg.3
+cprint.cCode(val) Converts formatting codes into colors.* vars.
+cprint.cprint(string)  print() with formatting.
+cprint.cwrite(string) write() with formatting.
+cprint.clear() Resets foreground, background color and mouse position in terminal.
+
+escalias - Fixes text read from files.
+escalias.fix(string) Parses newlines, tabs, and unicode read from files.
+escalias.parseOps(val1, op, val2) Parses math equations from text, such as "8*3"
+
+---
+API Guide Part 3
+
+palette - Recolor the terminal and any wrapped monitor using palette files.
+This is not an API, but a runnable program. Here's an example with syntax:
+palette palettefile
+/gcDir/apis/palette /gcDir/apis/cfg/gcp1
+
+To reset any terminal or monitor palette:
+/gcDir/apis/palette --reset
+
+---
+API Guide Part 4
+
+settingfile - Create configuration files in a simpler format than the default settings API.
+File setup example:
+Style 1
+
+val = 5
+[Section Name]
+secval = string
+
+Style 2
+
+val : 5
+[Section Name]
+secval : string
+
+file = settingfile.openSettingsFile("/filepath")
+file.setValue("valname","value")
+file.getValue("valname")
+file.setSectionedValue("sectionname","valname","value")
+file.getSectionedValue("sectionname","valname")
+
+Values can be organized under named [sections]. Use ; to write comments.
+
+---
+API Guide Part 5
+
+surface - Easily display images and text on terminals and monitors.
+
+local surfapi = dofile("/goldcubeDir/apis/surface")
+
+surfbg = colors.black
+surface = surfapi.create(51, 19, surfbg)
+.create will make a surface window in any size. The standard resolution for terminals is 51x19
+
+surfimg = surfapi.load("/filepath")
+surface:drawSurface(surfimg, 0, 0)
+:drawSurface will draw a loaded image or surface on top of another surface.
+
+---
+API Guide Part 6
+
+surface:drawString(string, x, y, bgCol, txtCol)
+When you're done assigning elements to a surface,
+use :output to draw it on a monitor. 
+
+surface:output()
+or
+surface:output(monitorObj, x, y)

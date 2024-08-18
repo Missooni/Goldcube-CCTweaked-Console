@@ -1,4 +1,8 @@
-os.loadAPI("goldcubeapi")
+local relativeDir = fs.getDir(shell.getRunningProgram())
+settings.load(relativeDir.."/apis/cfg/gcsystem")
+settings.set("relativeDir", relativeDir)
+settings.save(relativeDir.."/apis/cfg/gcsystem")
+os.loadAPI(relativeDir.."/apis/goldcubeapi")
 if peripheral.getType("top") == "monitor" and peripheral.getType("left") == "monitor" then
 goldcubeapi.colorMonitors(shell)
 end
@@ -13,14 +17,14 @@ goldcubeapi.delay(0.2)
 goldcubeapi.speaker.playNote("bit",1, 13)
 end
 if goldcubeapi.imgscreen ~= nil then
-local surface = dofile("surface")
+local surface = dofile(relativeDir.."/apis/surface")
 local surf = surface.create(57, 24)
-local logoFrames = fs.list("startanim")
+local logoFrames = fs.list(relativeDir.."/docs/startanim")
 local surfimg = ""
 term.redirect(goldcubeapi.imgscreen)
 for k, v in pairs(logoFrames) do
     surf:clear(colors.black)
-    surfimg = surface.load("startanim/"..v)
+    surfimg = surface.load(relativeDir.."/docs/startanim/"..v)
     surf:drawSurface(surfimg, 9, 1)
     surf:output(goldcubeapi.imgscreen)
     os.sleep(0.1)

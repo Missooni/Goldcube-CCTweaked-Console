@@ -1,0 +1,19 @@
+ff                                                   
+ff 8Making Plugins              f                8Pg.23f 
+ff 4All plugins need their own folder in the 'plugins'
+ff 4directory. (It can be named anything)f             
+ff 1Example:f                                          
+ff 4"/consoleDir/plugins/yourPlugin/"f                 
+ff                                                   
+ff 4Inside this folder, create two files,f             
+ff 4'init.lua' and 'info.txt'f                         
+ff 4The console will display folder names from thef    
+ff 4'Installed Plugins' menu. 'init.lua' will be thef  
+ff 4script used when your plugin is launched.f         
+ff                                                   
+ff                                                   
+ff                                                   
+ff                                                   
+ff                                                   
+ff                                                   
+ff                                                   

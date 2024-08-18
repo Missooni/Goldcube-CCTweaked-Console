@@ -1,11 +1,11 @@
-os.loadAPI("cprint")
-os.loadAPI("settingfile")
-os.loadAPI("escalias")
-settings.load("gcsystem")
+gcDir = settings.get("relativeDir")
+
+os.loadAPI(gcDir.."/apis/cprint")
+os.loadAPI(gcDir.."/apis/settingfile")
+os.loadAPI(gcDir.."/apis/escalias")
 --Goldcube API, MIT license (c) Missooni 2024
 
-gameLoop = true
-surface = dofile("surface")
+surface = dofile(gcDir.."/apis/surface")
 terminal = term.current()
 logger = window.create(terminal, 4, 1, 18, 20, false)
 stats = window.create(terminal, 27, 1, 20, 20, false)
@@ -15,31 +15,28 @@ diskdrive = peripheral.wrap("right")
 speaker = peripheral.wrap("bottom")
 disklabel = disk.getLabel("right")
 if disklabel == nil then disklabel = "Unlabeled Disk" end
+palettecfg = settingfile.openSettingsFile(gcDir.."/apis/cfg/palettecfg")
 
     if (textscreen ~= nil and imgscreen ~= nil) then
         term.redirect(textscreen)
         term.clear()
         term.setCursorPos(1,1)
         term.setCursorBlink(false)
-        local textresx,textresy = term.getSize()
-        textres = (textresx.." "..textresy)
         textscreen.setTextScale(1)
         term.redirect(imgscreen)
         term.clear()
         term.setCursorPos(1,1)
         term.setCursorBlink(false)
-        local imgresx,imgresy = term.getSize()
-        imgres = (imgresx.." "..imgresy)
         imgscreen.setTextScale(0.5)
         term.redirect(terminal)
     end
 
 function drawConsoleMenu()
-cprint.clear(true)
+cprint.clear()
 cprint.cprint("&1             _   _         _       ")
 cprint.cprint("     ___ ___| |_| |___ _ _| |_ ___ ")
 cprint.cprint("    | . | . | | . |  _| | | . | -_|")
-cprint.cprint("    |_  |___|_|___|___|___|___|___| v1")
+cprint.cprint("    |_  |___|_|___|___|___|___|___| v1.4")
 cprint.cprint("    |___|                          ")
 cprint.cprint("\n&4   Welcome to your Goldcube system!")
 if (fs.exists("disk/gcgame/game.lua")) == true then
@@ -48,76 +45,223 @@ else
     cprint.cprint("&e      No game disk has been found.")
 end
 cprint.cprint("\n&8        System Status:")
-if (peripheral.getType("top") == "monitor" and peripheral.getType("left") == "monitor" and peripheral.getType("right") == "drive" and peripheral.getType("bottom") == "speaker" and imgres == "57 24" and textres == "18 5") then
+if (peripheral.getType("top") == "monitor" and peripheral.getType("left") == "monitor" and peripheral.getType("right") == "drive" and peripheral.getType("bottom") == "speaker") then
 cprint.cprint("&5      All peripherals succesfully located")
 else
 cprint.cprint("&e      Peripherals are missing or misplaced.")
 end
-if (fs.exists("surface") == true and fs.exists("settingfile") == true and fs.exists("escalias") and fs.exists("cprint") == true and fs.exists("palette") == true) then
+if (fs.exists(gcDir.."/apis/surface") == true and fs.exists(gcDir.."/apis/settingfile") == true and fs.exists(gcDir.."/apis/escalias") and fs.exists(gcDir.."/apis/cprint") == true and fs.exists(gcDir.."/apis/palette") == true) then
 cprint.cprint("&5      All dependencies successfully initialized")
 else
 cprint.cprint("&e      API files are missing from this system.")
 end
-local palettecfg = settingfile.openSettingsFile("palettecfg")
 cprint.cprint("&1      Currently selected palette: "..palettecfg.getValue(settings.get("palette").."label"))
 cprint.cprint("      $0 \127$1 &2\127$2 &3\127$3 &4\127$4 &5\127$5 &6\127$6 &7\127$7 &8\127$8 &9\127$9 &a\127$a &b\127$b &c\127$c &d\127$d &e\127$e &f\127$f")
 cprint.cprint("&"..settings.get('butTxtCol1').."\n      $"..settings.get('butCol1').." Swap Palette $f $"..settings.get('butCol2').."&"..settings.get('butTxtCol2').." Play Game Disk $f")
-cprint.cprint("&0\n          $7 More system information \016 $f")
+cprint.cwrite("&0\n      &8\140$7 $f\145$f $7&0 More system information \016 $f")
+local w, h = term.getSize()
+term.setCursorPos(1,h)
 end
 
 function viewSystemInfo(infopageCurrent, shellObj)
-	local infoscreen = surface.load("docs/gcinfo"..infopageCurrent..".nft")
+	local infoscreen = surface.load(gcDir.."/docs/gcinfo"..infopageCurrent..".nft")
 	infoscreen:output()
     repeat
         event, button, x, y = os.pullEvent()
     until event == "mouse_click" or event == "mouse_scroll"
 	if event == "mouse_click" and button == 1 or button == 2 then 
-	if goldcubeapi.speaker ~= nil then
-	goldcubeapi.speaker.playNote("hat",1,4)
-	goldcubeapi.delay(0.2)
-	goldcubeapi.speaker.playNote("hat",1,2) end
+	if speaker ~= nil then
+	speaker.playNote("hat",1,4)
+	delay(0.2)
+	speaker.playNote("hat",1,2) end
 	drawConsoleMenu()
 	mainMenuButtons(shellObj)
 	elseif event == "mouse_scroll" and button == 1 then
-	if infopageCurrent < 20 then infopageCurrent = infopageCurrent + 1 end
-	goldcubeapi.speaker.playSound("item.book.page_turn",1,1.5)
+	if infopageCurrent < 30 then infopageCurrent = infopageCurrent + 1 
+	speaker.playSound("item.book.page_turn",1,1.5) end
 	viewSystemInfo(infopageCurrent, shellObj)
 	elseif event == "mouse_scroll" and button == -1 then
-	if infopageCurrent > 1 then infopageCurrent = infopageCurrent - 1 end
-	goldcubeapi.speaker.playSound("item.book.page_turn",1,1.5)
+	if infopageCurrent > 1 then infopageCurrent = infopageCurrent - 1
+	speaker.playSound("item.book.page_turn",1,1.5) end
 	viewSystemInfo(infopageCurrent, shellObj)
 	end
 end
+
+function viewSystemPlugins(selectedPlugin, lowerLimit, shellObj)
+	local pluginscreen = surface.load(gcDir.."/docs/gcplugins.nft")
+	if selectedPlugin > 0 then 
+	pluginscreen:drawString("                        \n                        ", 2, pluginY-1, colors.yellow, colors.yellow)
+	end
+	local plugtable = fs.list(gcDir.."/plugins/")
+	local labelBG, drawBG, labelTxt = colors.gray, colors.gray, colors.white
+	local upperLimit = lowerLimit + 4
+	local listNum = 1
+    for i=lowerLimit, upperLimit do
+	if plugtable[i] == nil then break end
+	if labelBG == colors.gray then labelBG = colors.lightGray else labelBG = colors.gray end
+	if selectedPlugin == i then 
+	drawBG = colors.yellow
+	labelTxt = colors.black
+	else
+	drawBG = labelBG
+	labelTxt = colors.white
+	end
+	listNum = listNum + 1
+	pluginscreen:drawString(i..".\n\\"..plugtable[i].."\\\n\n", 2, 2*listNum, drawBG, labelTxt)
+	end
+	if ((plugtable[selectedPlugin] ~= nil) and (fs.exists(gcDir.."/plugins/"..plugtable[selectedPlugin].."/info.txt"))) then
+		local plugfile = fs.open(gcDir.."/plugins/"..plugtable[selectedPlugin].."/info.txt", "r")
+		local lineNum = 1
+		while true do
+			local line = plugfile.readLine()
+			if not line then break end
+			pluginscreen:drawString(line.."\n", 30, lineNum+1, colors.black, colors.white)
+			lineNum = lineNum + 1
+		end
+		plugfile.close()
+	end
+	pluginscreen:output()
+    repeat
+    event, button, x, y = os.pullEvent()
+    until event == "mouse_click" or event == "mouse_scroll"
+	if event == "mouse_scroll" and button == 1 then
+	if plugtable[lowerLimit+5] ~= nil
+	then lowerLimit = lowerLimit + 5 
+	selectedPlugin = 0	
+	speaker.playSound("item.book.page_turn",1,1.5) end
+	viewSystemPlugins(selectedPlugin, lowerLimit, shellObj)
+	elseif event == "mouse_scroll" and button == -1 then 
+	if lowerLimit ~= 1 then lowerLimit = lowerLimit - 5 
+	selectedPlugin = 0	
+	speaker.playSound("item.book.page_turn",1,1.5) end
+	viewSystemPlugins(selectedPlugin, lowerLimit, shellObj) 
+	else
+	if ((x >= 3) and (x <= 26)) then
+		local tabDir = "/rom/programs/shell.lua"
+		if ((selectedPlugin > 0) and (plugtable[selectedPlugin] ~= nil) and fs.exists(gcDir.."/plugins/"..plugtable[selectedPlugin].."/init.lua")) then tabDir = gcDir.."/plugins/"..plugtable[selectedPlugin].."/init.lua" end
+		if (y == 2) then
+			term.setCursorPos(3,2)
+			cprint.cwrite("$7&8 Return to Console Menu $f")
+			if speaker ~= nil then
+			speaker.playNote("basedrum", 1, 7)
+			speaker.playNote("snare", 1, 16)
+			speaker.playNote("didgeridoo", 1, 7)
+			delay(0.275)
+			speaker.playNote("snare", 1, 5)
+			speaker.playNote("basedrum", 1, 0)
+			speaker.playNote("hat", 1, 3)
+			speaker.playNote("didgeridoo", 1, 5)
+			end
+			term.setCursorPos(3,2)
+			cprint.cwrite("$1&f Return to Console Menu $f")
+			delay(0.2)
+			drawConsoleMenu()
+			mainMenuButtons(shellObj)
+		elseif ((y == 16) and (x >= 15) and (x <= 23)) then
+			term.setCursorPos(15,16)
+			cprint.cwrite("$7&8 New Tab $f")
+			if speaker ~= nil then
+			speaker.playNote("cow_bell", 1, 17)
+			delay(0.15)
+			speaker.playNote("cow_bell", 1, 12)
+			end
+			term.setCursorPos(15,16)
+			cprint.cwrite("$7&0 New Tab $f")
+			delay(0.2)
+			shellObj.switchTab(shellObj.openTab(tabDir))
+			viewSystemPlugins(selectedPlugin, lowerLimit, shellObj)
+		elseif ((y == 16) and (x >= 6) and (x <= 13) and (plugtable[selectedPlugin] ~= nil) and fs.exists(gcDir.."/plugins/"..plugtable[selectedPlugin].."/init.lua")) then
+			term.setCursorPos(6,16)
+			cprint.cwrite("$7&8 Launch $f")
+			delay(0.2)
+			term.setCursorPos(6,16)
+			cprint.cwrite("$7&0 Launch $f")
+			if speaker ~= nil then
+			speaker.playNote("iron_xylophone", 1, 5)
+			speaker.playNote("bass", 1, 0)
+			delay(0.2)
+			speaker.playNote("iron_xylophone", 1, 7)
+			speaker.playNote("bass", 1, 5)
+			delay(0.175)
+			speaker.playNote("iron_xylophone", 1, 12)
+			speaker.playNote("bass", 1, 12)
+			end
+			term.clear()
+			term.setCursorPos(1,1)
+			shellObj.run(tabDir)
+			viewSystemPlugins(selectedPlugin, lowerLimit, shellObj)
+		elseif ((y == 16) and (x >= 6) and (x <= 13)) then
+			if speaker ~= nil then
+			speaker.playNote("iron_xylophone", 1, 7)
+			speaker.playNote("iron_xylophone", 1, 5)
+			speaker.playNote("bass", 1, 1)
+			speaker.playNote("didgeridoo", 1, 12)
+			speaker.playNote("didgeridoo", 1, 5)
+			end
+			viewSystemPlugins(selectedPlugin, lowerLimit, shellObj)
+		else
+			if ((button == 1) and (speaker ~= nil) and (pluginY ~= y) and (pluginY ~= y-1) and (y >= 5) and (y <= 14)) then speaker.playSound("ui.button.click",.3,1) end
+			if button == 2 then selectedPlugin = 0
+			elseif ((y == 5) or (y == 6)) then 
+			pluginY = 5
+			selectedPlugin = lowerLimit
+			elseif ((y == 7) or (y == 8)) then 
+			pluginY = 7
+			selectedPlugin = lowerLimit+1
+			elseif ((y == 9) or (y == 10)) then 
+			pluginY = 9
+			selectedPlugin = lowerLimit+2
+			elseif ((y == 11) or (y == 12)) then 
+			pluginY = 11
+			selectedPlugin = lowerLimit+3
+			elseif ((y == 13) or (y == 14)) then 
+			pluginY = 13
+			selectedPlugin = lowerLimit+4
+			end
+		viewSystemPlugins(selectedPlugin, lowerLimit, shellObj)
+		end
+	else
+	viewSystemPlugins(selectedPlugin, lowerLimit, shellObj)
+	end
+	end
+end
+
 
 function mainMenuButtons(shellObj)
     repeat
         event, button, x, y = os.pullEvent()
     until event == "mouse_click" or event == "key"
     if event == "key" then
-    
+	shellObj.exit()
+    shellObj.run("rom/programs/shell.lua")
     elseif ((x >= 7) and (x <= 20) and (y == 16)) then
-    local palettecfg = settingfile.openSettingsFile("palettecfg")
     local num = tonumber(string.sub(settings.get("palette"),-1))
-	if goldcubeapi.speaker ~= nil then
-	goldcubeapi.speaker.playNote("bit",1,1)
-	goldcubeapi.delay(0.27)
-	goldcubeapi.speaker.playNote("bit",1,4)
-	goldcubeapi.delay(0.15)
-	goldcubeapi.speaker.playNote("bit",1,13)
-	goldcubeapi.speaker.playNote("bit",1,21) end
-    if fs.exists("gcp"..(num+1)) and palettecfg.getValue("gcp"..(num+1).."label") ~= nil then
+	term.setCursorPos(7 , 16)
+	cprint.cwrite("$7&8 Swap Palette $f")
+	if speaker ~= nil then
+	speaker.playNote("bit",1,1)
+	delay(0.27)
+	speaker.playNote("bit",1,4)
+	delay(0.15)
+	speaker.playNote("bit",1,13)
+	speaker.playNote("bit",1,21) end
+    if fs.exists(gcDir.."/apis/cfg/".."gcp"..(num+1)) and palettecfg.getValue("gcp"..(num+1).."label") ~= nil then
     settings.set("palette", ("gcp"..(num+1)))
     else
     settings.set("palette", ("gcp1"))
     end
-    settings.save("gcsystem")
-	delay(0.20)
+    settings.save(gcDir.."/apis/cfg/gcsystem")
+	term.setCursorPos(7 , 16)
+	cprint.cwrite("$e&0 Swap Palette $f$0")
 	if peripheral.getType("top") == "monitor" and peripheral.getType("left") == "monitor" then
 	goldcubeapi.colorMonitors(shellObj)
+	drawConsoleMenu()
 	mainMenuButtons(shellObj)
 	end
     elseif ((x >= 22) and (x <= 37) and (y == 16)) then
     if fs.exists("disk/gcgame/game.lua") == true then
+	term.setCursorPos(22 , 16)
+	cprint.cwrite("$7&8 Play Game Disk $f")
 	local total = 0
 	for i = 1,#disklabel do
 		total = total + string.byte(disklabel:sub(i,i))
@@ -127,41 +271,106 @@ function mainMenuButtons(shellObj)
 	local note1 = string.sub(total,1,1)
 	local note2 = string.sub(total,2,2)
 	local note3 = string.sub(total,-1)
-	goldcubeapi.speaker.playNote("bit",1,note1+10)
-	goldcubeapi.delay(0.2)
-	goldcubeapi.speaker.playNote("bit",1,note2+10)
-	goldcubeapi.delay(0.2)
-	goldcubeapi.speaker.playNote("bit",1,note3+10)
+	if speaker ~= nil then
+	speaker.playNote("bit",1,note1+10)
+	delay(0.2)
+	speaker.playNote("bit",1,note2+10)
+	delay(0.2)
+	speaker.playNote("bit",1,note3+10)
+	end
+	term.setCursorPos(22 , 16)
+	cprint.cwrite("$b&0 Play Game Disk $f")
+	delay(0.2)
     shellObj.run("disk/gcgame/game.lua")
     elseif disk.isPresent("right") then
+	term.setCursorPos(22 , 16)
+	cprint.cwrite("$7&8  Writing Disk  $f")
+	if speaker~= nil then
+	speaker.playNote("bit", 1, 12)
+	delay(0.175)
+	speaker.playNote("bit", 1, 15)
+	delay(0.175)
+	speaker.playNote("bit", 1, 20)
+	delay(0.175)
+	speaker.playNote("bit", 1, 12)
+	delay(0.175)
+	speaker.playNote("bit", 1, 15)
+	delay(0.175)
+	speaker.playNote("bit", 1, 20)
+	end
+	delay(0.5)
     shellObj.run("mkdir disk/gcgame")
-    shellObj.run("copy template/* disk/gcgame")
+    shellObj.run("copy /"..gcDir.."/template/* disk/gcgame/")
+	else
+	if speaker ~= nil then
+	term.setCursorPos(22 , 16)
+	cprint.cwrite("$7&8  No Disk Found $f")
+	speaker.playNote("bit", 1, 4)
+	speaker.playNote("bit", 1, 1)
+	delay(0.25)
+	speaker.playNote("bit", 1, 1)
+	speaker.playNote("bit", 1, 4)
+	delay(0.25)
+	end
     end
-    os.reboot()
+    term.redirect(textscreen)
+	term.setCursorPos(1,1)
+	term.setCursorBlink(false)
+    term.clear()
+    term.redirect(imgscreen)
+    term.clear()
+    term.redirect(terminal)
+	term.setCursorBlink(false)
+	drawConsoleMenu()
+    mainMenuButtons(shellObj)
     elseif ((x >= 11) and (x <= 37) and (y == 18)) then
-	if goldcubeapi.speaker ~= nil then
-	goldcubeapi.speaker.playNote("hat",1,2)
-	goldcubeapi.delay(0.2)
-	goldcubeapi.speaker.playNote("hat",1,4) end
+	term.setCursorPos(11, 18)
+	cprint.cwrite("$7&8 More system information \016 $f")
+	if speaker ~= nil then
+	speaker.playNote("hat",1,2)
+	delay(0.2)
+	speaker.playNote("hat",1,4) end
+	term.setCursorPos(11, 18)
+	cprint.cwrite("$7&0 More system information \016 $f")
+	delay(0.2)
 	viewSystemInfo(1, shellObj)
+    elseif ((x >= 7) and (x <= 9) and (y == 18)) then
+	term.setCursorPos(9, 18)
+	cprint.cwrite("$f\145")
+	if speaker ~= nil then
+	speaker.playNote("basedrum", 1, 1)
+	delay(0.175)
+	speaker.playNote("basedrum", 1, 2)
+	delay(0.2)
+	speaker.playNote("basedrum", 1, 0)
+	speaker.playNote("snare", 1, 3)
+	speaker.playNote("hat", 1, 16)
+	speaker.playNote("didgeridoo", 1, 5)
+	end
+	viewSystemPlugins(0, 1, shellObj)
     else
     mainMenuButtons(shellObj)
     end
 end
 
-function gameMenuButtons()
+function gameMenuButtons(gameDir)
     repeat
         event, button, x, y = os.pullEvent()
     until event == "mouse_click"
-    if button == 1 and ((x >= 13) and (x <= 24) and (y == 15)) and fs.exists("disk/gcgame/gamefile") then
-    
+    if button == 1 and ((x >= 13) and (x <= 24) and (y == 15)) and fs.exists(gameDir.."/gamefile") then
+	term.setCursorPos(14,15)
+	cprint.cwrite("$7&8  \17 Load    $f&0")
+	delay(0.2)
     elseif button == 2 and ((x >= 26) and (x <= 37) and (y == 15)) then
+	term.setCursorPos(27,15)
+	cprint.cwrite("$7&8    New \16   $f&0")
+	delay(0.2)
     fs.delete(ogfile)
 	fs.delete(ogfile.."Display")
     fs.copy(ogfile.."Default", ogfile)
 	fs.copy(ogfile.."Default", ogfile.."Display")
     else
-    gameMenuButtons(ogfile)
+    gameMenuButtons()
     end
 end
 
@@ -251,12 +460,12 @@ function regionTouch(anchorTable)
 	end
 end
 
-function initiate()
+function initiate(gameDir)
     term.redirect(imgscreen)
     term.clear()
     term.redirect(terminal)
-    ogfile = "disk/gcgame/gamefile"
-    drawGameMenu()
+    ogfile = gameDir.."/gamefile"
+    drawGameMenu(gameDir)
     gcgamefile = settingfile.openSettingsFile(ogfile)
 	displayfile = settingfile.openSettingsFile(ogfile.."Display")
     term.clear()
@@ -267,24 +476,24 @@ function initiate()
     surfimg = surface.load(" ")
     surfbgimg = surface.load(" ")
     drawGameFile()
-    loadGameStage(gcgamefile.getValue("savestate"))
+    loadGameStage(gcgamefile.getValue("savestate"), gameDir)
 end
 
 function colorMonitors(shellObj)
-    shellObj.run("palette", settings.get("palette"))
+    shellObj.run(gcDir.."/apis/palette", gcDir.."/apis/cfg/"..settings.get("palette"))
     term.redirect(imgscreen)
-    shellObj.run("palette", settings.get("palette"))
+    shellObj.run(gcDir.."/apis/palette", gcDir.."/apis/cfg/"..settings.get("palette"))
     term.redirect(textscreen)
-    shellObj.run("palette", settings.get("palette"))
+    shellObj.run(gcDir.."/apis/palette", gcDir.."/apis/cfg/"..settings.get("palette"))
     term.redirect(stats)
-    shellObj.run("palette", settings.get("palette"))
+    shellObj.run(gcDir.."/apis/palette", gcDir.."/apis/cfg/"..settings.get("palette"))
     term.redirect(logger)
-    shellObj.run("palette", settings.get("palette"))
+    shellObj.run(gcDir.."/apis/palette", gcDir.."/apis/cfg/"..settings.get("palette"))
     term.redirect(terminal)
 end
 
-function drawGameMenu()
-    local menuBG = surface.load("disk/gcgame/menu.nft")
+function drawGameMenu(gameDir)
+    local menuBG = surface.load(gameDir.."/menu.nft")
 	local menuScreen = surface.create(51, 19)
     if menuBG ~= nil then 
 	menuScreen:drawSurface(menuBG, 0, 0)
@@ -292,12 +501,12 @@ function drawGameMenu()
 	else
 	menuScreen:drawString(disklabel, 25-(#disklabel/2), 8, colors.black, colors.white)
 	end
-    if fs.exists("disk/gcgame/gamefile") then menuScreen:drawLine(13, 14, 24, 14, cprint.cCode(settings.get("butCol1"))) end
+    if fs.exists(gameDir.."/gamefile") then menuScreen:drawLine(13, 14, 24, 14, cprint.cCode(settings.get("butCol1"))) end
     menuScreen:drawLine(26, 14, 37, 14, cprint.cCode(settings.get("butCol2")))
-    if fs.exists("disk/gcgame/gamefile") then menuScreen:drawString("\17 Load", 15, 14, cprint.cCode(settings.get("butCol1")), cprint.cCode(settings.get("butTxtCol1"))) end
+    if fs.exists(gameDir.."/gamefile") then menuScreen:drawString("\17 Load", 15, 14, cprint.cCode(settings.get("butCol1")), cprint.cCode(settings.get("butTxtCol1"))) end
     menuScreen:drawString("New \16", 30, 14, cprint.cCode(settings.get("butCol2")), cprint.cCode(settings.get("butTxtCol2")))
     menuScreen:output()
-    gameMenuButtons()
+    gameMenuButtons(gameDir)
 end
 
 function drawGameFile(isDisplay)
@@ -467,8 +676,8 @@ end
 return txt
 end
 
-function loadGameStage(stage)
-	local stagefile = fs.open("disk/gcgame/stages/"..stage, "r")
+function loadGameStage(stage, gameDir)
+	local stagefile = fs.open(gameDir.."/stages/"..stage, "r")
 	local skip = false
 	anchored = false
 	anchorkey = nil
@@ -525,7 +734,7 @@ function loadGameStage(stage)
         if #line <= 2 then
             surfbgimg = nil
         else
-            surfbgimg = surface.load("disk/gcgame/images/"..val0)
+            surfbgimg = surface.load(gameDir.."/images/"..val0)
             surf:drawSurface(surfbgimg, 0, 0)
         end
             surf:output(goldcubeapi.imgscreen)
@@ -533,7 +742,7 @@ function loadGameStage(stage)
         surf:drawString(val0, tonumber(mod1), tonumber(val1), cprint.cCode(mod2), cprint.cCode(val2))
         surf:output(goldcubeapi.imgscreen)
     elseif cmd1 == "{" and cmd2 == " " then
-        surfimg = surface.load("disk/gcgame/images/"..val0)
+        surfimg = surface.load(gameDir.."/images/"..val0)
         surf:drawSurface(surfimg, tonumber(mod1), tonumber(val1))
         surf:output(goldcubeapi.imgscreen)
     elseif cmd1 == "+" and cmd2 == " " then
@@ -611,7 +820,7 @@ function loadGameStage(stage)
 		fs.delete(ogfile)		 		
 		fs.copy(ogfile.."Display", ogfile)
 		stagefile.close()
-		stagefile = fs.open("disk/gcgame/stages/"..val0, "r")
+		stagefile = fs.open(gameDir.."/stages/"..val0, "r")
 		end
     end
     stagefile.close()
