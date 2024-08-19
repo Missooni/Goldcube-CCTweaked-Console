@@ -6,6 +6,7 @@ os.loadAPI(relativeDir.."/apis/goldcubeapi")
 if peripheral.getType("top") == "monitor" and peripheral.getType("left") == "monitor" then
 goldcubeapi.colorMonitors(shell)
 end
+goldcubeapi.clearMonitors()
 goldcubeapi.drawConsoleMenu()
 if peripheral.getType("bottom") == "speaker" then
 goldcubeapi.speaker.playNote("bit",1, 8)
