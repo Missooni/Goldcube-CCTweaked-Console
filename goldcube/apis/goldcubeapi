@@ -17,19 +17,22 @@ disklabel = disk.getLabel("right")
 if disklabel == nil then disklabel = "Unlabeled Disk" end
 palettecfg = settingfile.openSettingsFile(gcDir.."/apis/cfg/palettecfg")
 
+function clearMonitors()
     if (textscreen ~= nil and imgscreen ~= nil) then
         term.redirect(textscreen)
-        term.clear()
-        term.setCursorPos(1,1)
+        cprint.clear()
         term.setCursorBlink(false)
         textscreen.setTextScale(1)
         term.redirect(imgscreen)
-        term.clear()
-        term.setCursorPos(1,1)
+		cprint.clear()
         term.setCursorBlink(false)
         imgscreen.setTextScale(0.5)
-        term.redirect(terminal)
     end
+    term.redirect(stats)
+    term.redirect(logger)
+	cprint.clear()
+    term.redirect(terminal)
+end
 
 function drawConsoleMenu()
 cprint.clear()
@@ -254,7 +257,7 @@ function mainMenuButtons(shellObj)
 	term.setCursorPos(7 , 16)
 	cprint.cwrite("$e&0 Swap Palette $f$0")
 	if peripheral.getType("top") == "monitor" and peripheral.getType("left") == "monitor" then
-	goldcubeapi.colorMonitors(shellObj)
+	colorMonitors(shellObj)
 	drawConsoleMenu()
 	mainMenuButtons(shellObj)
 	end
@@ -313,14 +316,7 @@ function mainMenuButtons(shellObj)
 	delay(0.25)
 	end
     end
-    term.redirect(textscreen)
-	term.setCursorPos(1,1)
-	term.setCursorBlink(false)
-    term.clear()
-    term.redirect(imgscreen)
-    term.clear()
-    term.redirect(terminal)
-	term.setCursorBlink(false)
+    clearMonitors()
 	drawConsoleMenu()
     mainMenuButtons(shellObj)
     elseif ((x >= 11) and (x <= 37) and (y == 18)) then
@@ -361,6 +357,10 @@ function gameMenuButtons(gameDir)
 	term.setCursorPos(14,15)
 	cprint.cwrite("$7&8  \17 Load    $f&0")
 	delay(0.2)
+	if fs.exists(ogfile) then
+	fs.delete(ogfile.."Display")
+	fs.copy(ogfile, ogfile.."Display")
+	end
     elseif button == 2 and ((x >= 26) and (x <= 37) and (y == 15)) then
 	term.setCursorPos(27,15)
 	cprint.cwrite("$7&8    New \16   $f&0")
@@ -370,7 +370,7 @@ function gameMenuButtons(gameDir)
     fs.copy(ogfile.."Default", ogfile)
 	fs.copy(ogfile.."Default", ogfile.."Display")
     else
-    gameMenuButtons()
+    gameMenuButtons(gameDir)
     end
 end
 
@@ -461,10 +461,10 @@ function regionTouch(anchorTable)
 end
 
 function initiate(gameDir)
+    ogfile = gameDir.."/gamefile"
     term.redirect(imgscreen)
     term.clear()
     term.redirect(terminal)
-    ogfile = gameDir.."/gamefile"
     drawGameMenu(gameDir)
     gcgamefile = settingfile.openSettingsFile(ogfile)
 	displayfile = settingfile.openSettingsFile(ogfile.."Display")
@@ -497,7 +497,7 @@ function drawGameMenu(gameDir)
 	local menuScreen = surface.create(51, 19)
     if menuBG ~= nil then 
 	menuScreen:drawSurface(menuBG, 0, 0)
-    menuBG:output(goldcubeapi.imgscreen, 3, 2)
+    menuBG:output(imgscreen, 3, 2)
 	else
 	menuScreen:drawString(disklabel, 25-(#disklabel/2), 8, colors.black, colors.white)
 	end
@@ -727,7 +727,7 @@ function loadGameStage(stage, gameDir)
         val0 = cprint.cCode(val0)   
         surf:clear(val0)
         if surfbgimg ~= nil then surf:drawSurface(surfbgimg, 0, 0) end
-        surf:output(goldcubeapi.imgscreen)
+        surf:output(imgscreen)
         surfbg = val0
     elseif cmd1 == "[" then
         surf:clear(surfbg)
@@ -737,14 +737,14 @@ function loadGameStage(stage, gameDir)
             surfbgimg = surface.load(gameDir.."/images/"..val0)
             surf:drawSurface(surfbgimg, 0, 0)
         end
-            surf:output(goldcubeapi.imgscreen)
+            surf:output(imgscreen)
     elseif cmd1 == "{" and cmd2 == ">" then
         surf:drawString(val0, tonumber(mod1), tonumber(val1), cprint.cCode(mod2), cprint.cCode(val2))
-        surf:output(goldcubeapi.imgscreen)
+        surf:output(imgscreen)
     elseif cmd1 == "{" and cmd2 == " " then
         surfimg = surface.load(gameDir.."/images/"..val0)
         surf:drawSurface(surfimg, tonumber(mod1), tonumber(val1))
-        surf:output(goldcubeapi.imgscreen)
+        surf:output(imgscreen)
     elseif cmd1 == "+" and cmd2 == " " then
         speaker.playSound(val0, tonumber(mod1), tonumber(val1))
 	elseif cmd1 == "*" then
