@@ -32,6 +32,7 @@ function clearMonitors()
     term.redirect(logger)
 	cprint.clear()
     term.redirect(terminal)
+    term.setCursorBlink(false)
 end
 
 function drawConsoleMenu()
