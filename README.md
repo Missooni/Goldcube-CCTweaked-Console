@@ -1,6 +1,6 @@
 ### Goldcube Gaming Console for ComputerCraft:Tweaked
 
-![A picture of the Goldcube console, displaying an image on the upper monitor and text on the lower monitor.]([https://github.com/Missooni/Goldcube-CCTweaked-Console/blob/page/javaw_kr4oT340zi.png?raw=true](https://raw.githubusercontent.com/Missooni/Goldcube-CCTweaked-Console/page/javaw_9u6qswEfNT.png))
+![A picture of the Goldcube console, displaying an image on the upper monitor and text on the lower monitor.](https://raw.githubusercontent.com/Missooni/Goldcube-CCTweaked-Console/page/javaw_9u6qswEfNT.png)
 
 **Console Features:**
 • Portable console files make it easy to install and run from any computer.
