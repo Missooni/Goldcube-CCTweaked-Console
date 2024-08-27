@@ -30,7 +30,7 @@ function clearMonitors()
     end
     term.redirect(stats)
     term.redirect(logger)
-	cprint.clear()
+	    cprint.clear()
     term.redirect(terminal)
     term.setCursorBlink(false)
 end
@@ -40,7 +40,7 @@ cprint.clear()
 cprint.cprint("&1             _   _         _       ")
 cprint.cprint("     ___ ___| |_| |___ _ _| |_ ___ ")
 cprint.cprint("    | . | . | | . |  _| | | . | -_|")
-cprint.cprint("    |_  |___|_|___|___|___|___|___| v1.4")
+cprint.cprint("    |_  |___|_|___|___|___|___|___| v1.4.2")
 cprint.cprint("    |___|                          ")
 cprint.cprint("\n&4   Welcome to your Goldcube system!")
 if (fs.exists("disk/gcgame/game.lua")) == true then
@@ -60,9 +60,9 @@ else
 cprint.cprint("&e      API files are missing from this system.")
 end
 cprint.cprint("&1      Currently selected palette: "..palettecfg.getValue(settings.get("palette").."label"))
-cprint.cprint("      $0 \127$1 &2\127$2 &3\127$3 &4\127$4 &5\127$5 &6\127$6 &7\127$7 &8\127$8 &9\127$9 &a\127$a &b\127$b &c\127$c &d\127$d &e\127$e &f\127$f")
+cprint.cprint("      $0 $1 &2$2 &3$3 &4$4 &5$5 &6$6 &7$7 &8$8 &9$9 &a$a &b$b &c$c &d$d &e$e &f$f")
 cprint.cprint("&"..settings.get('butTxtCol1').."\n      $"..settings.get('butCol1').." Swap Palette $f $"..settings.get('butCol2').."&"..settings.get('butTxtCol2').." Play Game Disk $f")
-cprint.cwrite("&0\n      &8\140$7 $f\145$f $7&0 More system information \016 $f")
+cprint.cwrite("&0\n      &8Œ$7 $f‘$f $7&0 More system information  $f")
 local w, h = term.getSize()
 term.setCursorPos(1,h)
 end
@@ -258,7 +258,7 @@ function mainMenuButtons(shellObj)
 	term.setCursorPos(7 , 16)
 	cprint.cwrite("$e&0 Swap Palette $f$0")
 	if peripheral.getType("top") == "monitor" and peripheral.getType("left") == "monitor" then
-	colorMonitors(shellObj)
+	colorMonitors(shellObj, gcDir.."/apis/cfg/"..settings.get("palette"))
 	drawConsoleMenu()
 	mainMenuButtons(shellObj)
 	end
@@ -286,6 +286,7 @@ function mainMenuButtons(shellObj)
 	cprint.cwrite("$b&0 Play Game Disk $f")
 	delay(0.2)
     shellObj.run("disk/gcgame/game.lua")
+	colorMonitors(shellObj, gcDir.."/apis/cfg/"..settings.get("palette"))
     elseif disk.isPresent("right") then
 	term.setCursorPos(22 , 16)
 	cprint.cwrite("$7&8  Writing Disk  $f")
@@ -322,18 +323,18 @@ function mainMenuButtons(shellObj)
     mainMenuButtons(shellObj)
     elseif ((x >= 11) and (x <= 37) and (y == 18)) then
 	term.setCursorPos(11, 18)
-	cprint.cwrite("$7&8 More system information \016 $f")
+	cprint.cwrite("$7&8 More system information  $f")
 	if speaker ~= nil then
 	speaker.playNote("hat",1,2)
 	delay(0.2)
 	speaker.playNote("hat",1,4) end
 	term.setCursorPos(11, 18)
-	cprint.cwrite("$7&0 More system information \016 $f")
+	cprint.cwrite("$7&0 More system information  $f")
 	delay(0.2)
 	viewSystemInfo(1, shellObj)
     elseif ((x >= 7) and (x <= 9) and (y == 18)) then
 	term.setCursorPos(9, 18)
-	cprint.cwrite("$f\145")
+	cprint.cwrite("$f‘")
 	if speaker ~= nil then
 	speaker.playNote("basedrum", 1, 1)
 	delay(0.175)
@@ -461,7 +462,7 @@ function regionTouch(anchorTable)
 	end
 end
 
-function initiate(gameDir)
+function initiate(shellObj, gameDir)
     ogfile = gameDir.."/gamefile"
     term.redirect(imgscreen)
     term.clear()
@@ -477,19 +478,19 @@ function initiate(gameDir)
     surfimg = surface.load(" ")
     surfbgimg = surface.load(" ")
     drawGameFile()
-    loadGameStage(gcgamefile.getValue("savestate"), gameDir)
+    loadGameStage(shellObj, gcgamefile.getValue("savestate"), gameDir)
 end
 
-function colorMonitors(shellObj)
-    shellObj.run(gcDir.."/apis/palette", gcDir.."/apis/cfg/"..settings.get("palette"))
+function colorMonitors(shellObj, pal)
+    shellObj.run(gcDir.."/apis/palette", pal)
     term.redirect(imgscreen)
-    shellObj.run(gcDir.."/apis/palette", gcDir.."/apis/cfg/"..settings.get("palette"))
+    shellObj.run(gcDir.."/apis/palette", pal)
     term.redirect(textscreen)
-    shellObj.run(gcDir.."/apis/palette", gcDir.."/apis/cfg/"..settings.get("palette"))
+    shellObj.run(gcDir.."/apis/palette", pal)
     term.redirect(stats)
-    shellObj.run(gcDir.."/apis/palette", gcDir.."/apis/cfg/"..settings.get("palette"))
+    shellObj.run(gcDir.."/apis/palette", pal)
     term.redirect(logger)
-    shellObj.run(gcDir.."/apis/palette", gcDir.."/apis/cfg/"..settings.get("palette"))
+    shellObj.run(gcDir.."/apis/palette", pal)
     term.redirect(terminal)
 end
 
@@ -511,6 +512,7 @@ function drawGameMenu(gameDir)
 end
 
 function drawGameFile(isDisplay)
+	stats.setVisible(false)
     term.redirect(stats)
     term.clear()
     term.setCursorPos(1,1)
@@ -541,6 +543,7 @@ function drawGameFile(isDisplay)
 			cprint.cprint(" ")
         end
     end
+	stats.setVisible(true)
     term.redirect(terminal)
 end
             
@@ -563,6 +566,8 @@ end
 
 function choiceTouch(label1, mod1, op1, val1, label2, mod2, op2, val2)
 	term.redirect(textscreen)
+	term.clear()
+	term.setCursorPos(1,3)
     local new1 = ""
     local new2 = ""
     if tonumber(displayfile.getSectionedValue("Stats Page",mod1)) ~= nil then 
@@ -579,7 +584,6 @@ function choiceTouch(label1, mod1, op1, val1, label2, mod2, op2, val2)
     new1 = escalias.parseOps(new1,op1,tonumber(val1)) end
     if op2 == ":" then new2 = val2 else
 	new2 = escalias.parseOps(new2,op2,tonumber(val2)) end
-    cprint.cprint("\n")
     cprint.cwrite(" &"..settings.get('butTxtCol1').."$"..settings.get('butCol1').."\17"..label1.."$f")
 	moveMousePos(-(18-(#label2+2)-(#label1+2)),0)
 	cprint.cprint("&"..settings.get('butTxtCol2').."$"..settings.get('butCol2')..label2.."\16$f")
@@ -593,10 +597,9 @@ function choiceTouch(label1, mod1, op1, val1, label2, mod2, op2, val2)
     end
     displayfile.save(ogfile.."Display")
     drawGameFile("display")
-	term.redirect(logger)
-	cprint.cprint(" ")
     term.redirect(textscreen)
-    cprint.cprint(" ")
+    term.clear()
+	term.setCursorPos(1,1)
 end
 
 function choiceDPad(label1,anchor1,label2,anchor2,label3,anchor3,label4,anchor4)
@@ -677,7 +680,7 @@ end
 return txt
 end
 
-function loadGameStage(stage, gameDir)
+function loadGameStage(shellObj, stage, gameDir)
 	local stagefile = fs.open(gameDir.."/stages/"..stage, "r")
 	local skip = false
 	anchored = false
@@ -724,6 +727,7 @@ function loadGameStage(stage, gameDir)
     elseif cmd1 == ">" and cmd2 == " " then slowLogPrint(val0, 0.05)
     elseif cmd1 == ">" and cmd2 == "?" then slowLogPrint(val0, 0.1)
     elseif cmd1 == ">" and cmd2 == "!" then logPrint(val0)
+	elseif cmd1 == "#" and fs.exists(gameDir.."/palettes/") then colorMonitors(shellObj, gameDir.."/palettes/"..val0)
     elseif cmd1 == "[" and cmd2 == "$" then 
         val0 = cprint.cCode(val0)   
         surf:clear(val0)
@@ -740,9 +744,12 @@ function loadGameStage(stage, gameDir)
         end
             surf:output(imgscreen)
     elseif cmd1 == "{" and cmd2 == ">" then
-        surf:drawString(val0, tonumber(mod1), tonumber(val1), cprint.cCode(mod2), cprint.cCode(val2))
+		if mod2 == "nil" then mod2 = nil else mod2 = cprint.cCode(mod2) end
+        surf:drawString(val0, tonumber(mod1), tonumber(val1), mod2, cprint.cCode(val2))
         surf:output(imgscreen)
     elseif cmd1 == "{" and cmd2 == " " then
+		val1 = parseStats(val1)
+		mod1 = parseStats(mod1)
         surfimg = surface.load(gameDir.."/images/"..val0)
         surf:drawSurface(surfimg, tonumber(mod1), tonumber(val1))
         surf:output(imgscreen)
@@ -797,7 +804,8 @@ function loadGameStage(stage, gameDir)
         choiceDPad(label1, val1, label2, val2, label3, val3, label4, val4)
 		dPadButtons(val1, val2, val3, val4)
 		term.redirect(textscreen)
-		cprint.cprint("\n")
+		term.clear()
+		term.setCursorPos(1,1)
 	elseif cmd1 == "-" and cmd2 == "^" then
 		anchorTable = {}
 		for capture in string.gmatch(line,"%[(.-)%]") do
