@@ -1,2 +1,2 @@
-goldcubeapi.initiate(fs.getDir(shell.getRunningProgram()))
+goldcubeapi.initiate(shell, fs.getDir(shell.getRunningProgram()))
 shell.exit()
