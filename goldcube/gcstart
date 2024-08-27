@@ -4,7 +4,7 @@ settings.set("relativeDir", relativeDir)
 settings.save(relativeDir.."/apis/cfg/gcsystem")
 os.loadAPI(relativeDir.."/apis/goldcubeapi")
 if peripheral.getType("top") == "monitor" and peripheral.getType("left") == "monitor" then
-goldcubeapi.colorMonitors(shell)
+goldcubeapi.colorMonitors(shell, relativeDir.."/apis/cfg/"..settings.get("palette"))
 end
 goldcubeapi.clearMonitors()
 goldcubeapi.drawConsoleMenu()
